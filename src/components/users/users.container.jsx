@@ -4,6 +4,9 @@ import { bindActionCreators } from 'redux';
 
 import { fetchUsers } from '../../redux/actions/index';
 
+import Loader from '../loader/loader';
+import UsersComponent from './users.component';
+
 class Users extends Component {
   constructor(props) {
     super(props);
@@ -17,10 +20,30 @@ class Users extends Component {
 
   renderUsersList = () => {
     const { users, pending, error } = this.props;
+
+    if (pending) {
+      return (
+        <div>
+          <Loader />
+        </div>
+      );
+    }
+
+    if (error) {
+      return (
+        <div>
+          <p>Something went wrong with API server</p>
+        </div>
+      );
+    }
+
+    if (!pending && !!users) {
+      return users.map((user, i) => <UsersComponent key={i} user={user} />);
+    }
   };
 
   render() {
-    return <div>Users container</div>;
+    return <>{this.renderUsersList()}</>;
   }
 }
 
