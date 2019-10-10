@@ -1,6 +1,6 @@
 # Installation
 
-Food2Fork requires [Node.js](https://nodejs.org/) to run.
+Speaking-agency-test requires [Node.js](https://nodejs.org/) to run.
 
 Install the dependencies and devDependencies and start the server.
 
@@ -12,7 +12,7 @@ $ npm start
 
 # Goal
 
-Carnet d'adresses
+Carnet d'adresses.
 Test JavaScript
 L'objectif de cet exercice est de créer un carnet d'adresses composé d'une liste de noms et prénoms et d'une fiche détaillée, sur le modèle des carnets d'adresses de nos smartphones. Il faut utiliser VueJS pour réaliser cet exercice.
 
