@@ -31,7 +31,7 @@ class Users extends Component {
   };
 
   renderUsersList = () => {
-    const { users, pending, error, getUserDetails } = this.props;
+    const { users, pending, error, getUserDetails, search } = this.props;
 
     if (pending) {
       return (
@@ -54,6 +54,11 @@ class Users extends Component {
         .sort((a, b) =>
           a.first_name.toLowerCase() > b.first_name.toLowerCase() ? 1 : -1
         )
+        .filter(users => {
+          return (
+            users.first_name.toLowerCase().search(search.toLowerCase()) !== -1
+          );
+        })
         .map((user, i) => (
           <UsersComponent
             key={i}
@@ -136,7 +141,8 @@ const mapStateToProps = state => {
     users: state.users.users,
     pending: state.users.pending,
     error: state.users.error,
-    userSelected: state.users.userSelected
+    userSelected: state.users.userSelected,
+    search: state.users.search
   };
 };
 

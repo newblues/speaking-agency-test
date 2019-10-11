@@ -33,3 +33,12 @@ export const getUserDetails = user => {
     });
   };
 };
+
+export const searchUser = searchInput => {
+  return function(dispatch) {
+    dispatch({
+      type: AT.SEARCH_USER,
+      payload: searchInput
+    });
+  };
+};

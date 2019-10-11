@@ -4,7 +4,8 @@ const initialState = {
   pending: false,
   error: null,
   users: [],
-  userSelected: ''
+  userSelected: '',
+  search: ''
 };
 
 const usersReducer = (state = initialState, action) => {
@@ -30,6 +31,11 @@ const usersReducer = (state = initialState, action) => {
       return {
         ...state,
         userSelected: action.payload
+      };
+    case AT.SEARCH_USER:
+      return {
+        ...state,
+        search: action.payload
       };
 
     default:

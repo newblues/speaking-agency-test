@@ -6,12 +6,10 @@ import {
   NavbarBrand,
   Nav,
   NavItem,
-  NavLink,
-  UncontrolledDropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem
+  NavLink
 } from 'reactstrap';
+
+import SearchBar from '../search-bar/search-bar';
 
 export default class Example extends React.Component {
   constructor(props) {
@@ -36,7 +34,10 @@ export default class Example extends React.Component {
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className='ml-auto' navbar>
               <NavItem>
-                <NavLink href='/components/'>Components</NavLink>
+                <NavLink>
+                  {' '}
+                  <SearchBar />
+                </NavLink>
               </NavItem>
             </Nav>
           </Collapse>
