@@ -1,11 +1,7 @@
 .container {
   display: flex;
-  justify-content: center;
-  align-items: center;
   cursor: pointer;
   margin: 0px 0px 10px 0px;
-}
-
-.avatar {
-  width: 200px;
+  align-items: center;
+  justify-content: center;
 }

@@ -1,3 +1,21 @@
 .row-container :hover {
   background-color: #f1f3f4;
 }
+
+.modal-title {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0;
+  line-height: 1;
+  justify-content: space-between;
+}
+
+.sub-title {
+  font-family: Montserrat, sans-serif;
+  margin-right: 5px;
+  font-weight: bold;
+}
+
+p {
+  margin: 0;
+}

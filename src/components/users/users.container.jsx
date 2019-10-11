@@ -5,8 +5,11 @@ import { Container, Row, Col, Modal, ModalHeader, ModalBody } from 'reactstrap';
 
 import { fetchUsers, getUserDetails } from '../../redux/actions/index';
 
+import { FaPhone, FaEnvelope } from 'react-icons/fa';
+
 import Loader from '../loader/loader';
 import UsersComponent from './users.component';
+import Avatar from '../avatar/avatar';
 
 import './users.container.css';
 
@@ -78,21 +81,49 @@ class Users extends Component {
         <Container>
           <Row className='row-container'>{this.renderUsersList()}</Row>
         </Container>
-        <Modal
-          isOpen={this.state.modal}
-          toggle={this.toggle}
-          className={this.props.className}
-        >
-          <ModalHeader toggle={this.toggle} close={closeBtn}>
-            {userSelected.first_name}{' '}
+        <Modal isOpen={this.state.modal} toggle={this.toggle}>
+          <ModalHeader
+            toggle={this.toggle}
+            close={closeBtn}
+            className='d-flex align-items-center modal-title'
+          >
+            <Avatar name={userSelected.first_name} />
+            <div className='ml-3'>
+              {userSelected.first_name} {userSelected.last_name}{' '}
+            </div>
           </ModalHeader>
           <ModalBody>
-            <Row>
-              <Col md={12}></Col>
-            </Row>
-            <Row>
-              <Col md={12}> </Col>
-            </Row>
+            <div className='d-flex align-items-center'>
+              <FaPhone className='mr-3' />
+              <p>{userSelected.phone_number}</p>
+            </div>
+            <div className='d-flex align-items-center'>
+              {' '}
+              <FaEnvelope className='mr-3' />
+              <p>{userSelected.email}</p>
+            </div>
+            <hr></hr>
+            <div className='d-flex align-items-center'>
+              {' '}
+              <p className='sub-title'>Country: </p>
+              <p>{userSelected.country}</p>
+            </div>
+            <div className='d-flex align-items-center'>
+              {' '}
+              <p className='sub-title'>City: </p>
+              <p> {userSelected.city}</p>
+            </div>
+            <hr></hr>
+            <div className='d-flex align-items-center'>
+              {' '}
+              <p className='sub-title'>Job: </p>
+              <p> {userSelected.job} </p>
+            </div>
+            <div className='d-flex align-items-center'>
+              {' '}
+              <p className='sub-title'>Driving license: </p>
+              <p> {userSelected.driving_license} </p>
+            </div>
           </ModalBody>
         </Modal>
       </div>
