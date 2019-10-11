@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { Container, Row, Col, Modal, ModalHeader, ModalBody } from 'reactstrap';
 
 import { fetchUsers } from '../../redux/actions/index';
 
 import Loader from '../loader/loader';
 import UsersComponent from './users.component';
+
+import './users.container.css';
 
 class Users extends Component {
   constructor(props) {
@@ -38,12 +41,20 @@ class Users extends Component {
     }
 
     if (!pending && !!users) {
-      return users.map((user, i) => <UsersComponent key={i} user={user} />);
+      return users
+        .sort((a, b) =>
+          a.first_name.toLowerCase() > b.first_name.toLowerCase() ? 1 : -1
+        )
+        .map((user, i) => <UsersComponent key={i} user={user} />);
     }
   };
 
   render() {
-    return <>{this.renderUsersList()}</>;
+    return (
+      <Container>
+        <Row className='row-container'>{this.renderUsersList()}</Row>
+      </Container>
+    );
   }
 }
 

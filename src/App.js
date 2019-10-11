@@ -2,13 +2,14 @@ import React from 'react';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.css';
 
-import Users from './components/users/users.container';
+import Nav from './components/nav/nav';
+import HomePage from './pages/home/home';
 
 const App = () => {
   return (
     <div className='App'>
-      <p>Hello world !!</p>
-      <Users />
+      <Nav />
+      <HomePage />
     </div>
   );
 };
