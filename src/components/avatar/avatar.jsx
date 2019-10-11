@@ -3,6 +3,9 @@ import React from 'react';
 import './avatar.css';
 
 const Avatar = ({ name }) => {
+  //
+  //
+  // function to randomize avatar color depending on user name
   const stringToColor = string => {
     let hash = 0;
     let i;
@@ -18,6 +21,7 @@ const Avatar = ({ name }) => {
     }
     return colour;
   };
+  // //
   return (
     <div>
       {' '}
