@@ -3,7 +3,8 @@ import { AT } from '../actions/action-types';
 const initialState = {
   pending: false,
   error: null,
-  users: []
+  users: [],
+  userSelected: ''
 };
 
 const usersReducer = (state = initialState, action) => {
@@ -24,6 +25,11 @@ const usersReducer = (state = initialState, action) => {
         ...state,
         pending: false,
         users: action.payload
+      };
+    case AT.GET_USER_DETAILS:
+      return {
+        ...state,
+        userSelected: action.payload
       };
 
     default:

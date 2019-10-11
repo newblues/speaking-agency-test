@@ -24,3 +24,12 @@ export const fetchUsers = () => {
       });
   };
 };
+
+export const getUserDetails = user => {
+  return function(dispatch) {
+    dispatch({
+      type: AT.GET_USER_DETAILS,
+      payload: user
+    });
+  };
+};

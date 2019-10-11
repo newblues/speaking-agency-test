@@ -5,9 +5,9 @@ import Avatar from '../avatar/avatar';
 
 import './users.component.css';
 
-const UsersComponent = ({ user }) => {
+const UsersComponent = ({ user, userDetailsCallBack }) => {
   return (
-    <div className='container'>
+    <div className='container' onClick={() => userDetailsCallBack(user)}>
       <Col xs='2' className='d-flex justify-content-start align-items-center'>
         <Avatar className='avatar' name={user.first_name} />
       </Col>
