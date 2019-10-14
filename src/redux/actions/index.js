@@ -26,7 +26,7 @@ export const fetchUsers = () => {
 };
 
 export const getUserDetails = user => {
-  return function(dispatch) {
+  return dispatch => {
     dispatch({
       type: AT.GET_USER_DETAILS,
       payload: user
@@ -35,10 +35,20 @@ export const getUserDetails = user => {
 };
 
 export const searchUser = searchInput => {
-  return function(dispatch) {
+  return dispatch => {
     dispatch({
       type: AT.SEARCH_USER,
       payload: searchInput
+    });
+  };
+};
+
+export const deleteUser = user => {
+  console.log('TLC: user', user);
+  return dispatch => {
+    dispatch({
+      type: AT.DELETE_USER,
+      payload: user.first_name
     });
   };
 };

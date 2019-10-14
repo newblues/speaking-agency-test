@@ -21,6 +21,7 @@ const usersReducer = (state = initialState, action) => {
         pending: false,
         error: action.payload
       };
+
     case AT.FETCH_USERS_SUCCESS:
       return {
         ...state,
@@ -36,6 +37,11 @@ const usersReducer = (state = initialState, action) => {
       return {
         ...state,
         search: action.payload
+      };
+    case AT.DELETE_USER:
+      return {
+        ...state,
+        users: state.users.filter(user => user.first_name !== action.payload)
       };
 
     default:

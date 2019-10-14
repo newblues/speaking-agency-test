@@ -1,9 +1,15 @@
 import React, { Component } from 'react';
+
+// redux
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Container, Row, Col, Modal, ModalHeader, ModalBody } from 'reactstrap';
+import {
+  fetchUsers,
+  getUserDetails,
+  deleteUser
+} from '../../redux/actions/index';
 
-import { fetchUsers, getUserDetails } from '../../redux/actions/index';
+import { Container, Row, Modal, ModalHeader, ModalBody } from 'reactstrap';
 
 import { FaPhone, FaEnvelope } from 'react-icons/fa';
 
@@ -16,13 +22,15 @@ import './users.container.css';
 class Users extends Component {
   constructor(props) {
     super(props);
-    this.state = { modal: false };
+    this.state = {
+      modal: false
+    };
   }
 
-  componentDidMount() {
+  componentDidMount = () => {
     const { fetchUsers } = this.props;
     fetchUsers();
-  }
+  };
 
   toggle = () => {
     this.setState(prevState => ({
@@ -31,11 +39,19 @@ class Users extends Component {
   };
 
   renderUsersList = () => {
-    const { users, pending, error, getUserDetails, search } = this.props;
+    const {
+      users,
+      pending,
+      error,
+      getUserDetails,
+      deleteUser,
+      search
+    } = this.props;
 
+    // display loader while api is loading
     if (pending) {
       return (
-        <div>
+        <div className='loader-container'>
           <Loader />
         </div>
       );
@@ -49,32 +65,39 @@ class Users extends Component {
       );
     }
 
+    // wainting for api to get all data
     if (!pending && !!users) {
-      return users
-        .sort((a, b) =>
-          a.first_name.toLowerCase() > b.first_name.toLowerCase() ? 1 : -1
-        )
-        .filter(users => {
-          return (
-            users.first_name.toLowerCase().search(search.toLowerCase()) !== -1
-          );
-        })
-        .map((user, i) => (
-          <UsersComponent
-            key={i}
-            user={user}
-            userDetailsCallBack={() => {
-              getUserDetails(user);
-              this.toggle();
-            }}
-          />
-        ));
+      return (
+        users
+          // filtering user by alphabetic order
+          .sort((a, b) =>
+            a.first_name.toLowerCase() > b.first_name.toLowerCase() ? 1 : -1
+          )
+          // filtering user by searchInput
+          .filter(users => {
+            return (
+              users.first_name.toLowerCase().search(search.toLowerCase()) !== -1
+            );
+          })
+          .map((user, i) => (
+            <UsersComponent
+              key={i}
+              user={user}
+              userDetailsCallBack={() => {
+                getUserDetails(user);
+                this.toggle();
+              }}
+              deleteUserCallBack={() => deleteUser(user)}
+            />
+          ))
+      );
     }
   };
 
   render() {
     const { userSelected } = this.props;
 
+    // btn for closing modal
     const closeBtn = (
       <button className='close' onClick={this.toggle}>
         &times;
@@ -86,6 +109,7 @@ class Users extends Component {
         <Container>
           <Row className='row-container'>{this.renderUsersList()}</Row>
         </Container>
+
         <Modal isOpen={this.state.modal} toggle={this.toggle}>
           <ModalHeader
             toggle={this.toggle}
@@ -150,7 +174,8 @@ const mapDispatchToProps = dispatch => ({
   ...bindActionCreators(
     {
       fetchUsers,
-      getUserDetails
+      getUserDetails,
+      deleteUser
     },
     dispatch
   )
